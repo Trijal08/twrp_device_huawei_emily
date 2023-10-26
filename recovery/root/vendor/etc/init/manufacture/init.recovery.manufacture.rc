@@ -1,0 +1,30 @@
+service oeminfo_nvm /vendor/bin/oeminfo_nvm_server
+    group system readproc root
+    critical
+    ioprio rt 4
+    seclabel u:r:oeminfo_nvm:s0
+
+on fs
+    wait /dev/block/bootdevice/by-name/oeminfo
+    start oeminfo_nvm
+
+service atcmdserver /vendor/bin/atcmdserver
+    class server
+    user root
+    group root system nfc
+    oneshot
+    disabled
+    seclabel u:r:atcmdserver:s0
+
+on property:odm.recovery.start_all_srv=true
+    start atcmdserver
+
+service smithloader /vendor/bin/smithloader
+    class server
+    user root
+    oneshot
+    disabled
+    seclabel u:r:smithloader:s0
+
+on property:ro.runmode=factory && property:odm.recovery.start_all_srv=true
+    start smithloader
