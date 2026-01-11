@@ -14,33 +14,19 @@
 # limitations under the License.
 #
 
-# Sample: This is where we'd set a backup provider if we had one
-# $(call inherit-product, device/sample/products/backup_overlay.mk)
-
-# Get the prebuilt list of APNs
-$(call inherit-product, vendor/omni/config/gsm.mk)
-
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
-# Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+# Inherit some common recovery stuff
+$(call inherit-product, vendor/*/config/common.mk)
 
 PRODUCT_PACKAGES += \
     charger_res_images \
     charger
 
-PRODUCT_COPY_FILES += \
-    device/huawei/emily/dummykernel:kernel
-
-PRODUCT_NAME := omni_emily
+PRODUCT_NAME := twrp_emily
 PRODUCT_DEVICE := emily
 PRODUCT_BRAND := Huawei
-PRODUCT_MODEL := P20 Pro
+PRODUCT_MODEL := P20
 PRODUCT_MANUFACTURER := Huawei
-
-# Kernel inline build
-#TARGET_KERNEL_CONFIG := emily_defconfig
-#TARGET_VARIANT_CONFIG := emily_defconfig
-#TARGET_SELINUX_CONFIG := emily_defconfig

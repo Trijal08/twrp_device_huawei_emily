@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_emily.mk
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/twrp_emily.mk
+
+COMMON_LUNCH_CHOICES := \
+    twrp_emily-user \
+    twrp_emily-userdebug \
+    twrp_emily-eng
