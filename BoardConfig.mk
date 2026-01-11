@@ -28,10 +28,10 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x8000 --ramdisk_offset 0x01000000 --tag
 
 # phony empty kernel to satisfy build system, but this device does not
 # include a kernel in the recovery image -- flash to recovery_ramdisk
-TARGET_PREBUILT_KERNEL := device/huawei/charlotte/dummykernel
+TARGET_PREBUILT_KERNEL := device/huawei/emily/dummykernel
 # else uncomment below to build from sauce
-# TARGET_KERNEL_SOURCE := kernel/huawei/charlotte
-# TARGET_KERNEL_CONFIG := charlotte_defconfig
+# TARGET_KERNEL_SOURCE := kernel/huawei/emily
+# TARGET_KERNEL_CONFIG := emily_defconfig
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
@@ -47,7 +47,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 
 # SELinux
 SELINUX_IGNORE_NEVERALLOWS := true
-BOARD_SEPOLICY_DIRS += device/huawei/charlotte/sepolicy
+BOARD_SEPOLICY_DIRS += device/huawei/emily/sepolicy
 
 TW_THEME := portrait_hdpi
 BOARD_SUPPRESS_SECURE_ERASE := true
@@ -60,6 +60,6 @@ TW_USE_TOOLBOX := true
 TW_DEFAULT_BRIGHTNESS := "2048"
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/Battery
 # Device crashes if /sbin/modprobe is present so this is needed:
-BOARD_CUSTOM_BOOTIMG_MK := device/huawei/charlotte/custombootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := device/huawei/emily/custombootimg.mk
 # MTP will not work until we update it to support ffs
 TW_EXCLUDE_MTP := true

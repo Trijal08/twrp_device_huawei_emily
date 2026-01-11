@@ -32,15 +32,15 @@ PRODUCT_PACKAGES += \
     charger
 
 PRODUCT_COPY_FILES += \
-    device/huawei/charlotte/dummykernel:kernel
+    device/huawei/emily/dummykernel:kernel
 
-PRODUCT_NAME := omni_charlotte
-PRODUCT_DEVICE := charlotte
+PRODUCT_NAME := omni_emily
+PRODUCT_DEVICE := emily
 PRODUCT_BRAND := Huawei
 PRODUCT_MODEL := P20 Pro
 PRODUCT_MANUFACTURER := Huawei
 
 # Kernel inline build
-#TARGET_KERNEL_CONFIG := charlotte_defconfig
-#TARGET_VARIANT_CONFIG := charlotte_defconfig
-#TARGET_SELINUX_CONFIG := charlotte_defconfig
+#TARGET_KERNEL_CONFIG := emily_defconfig
+#TARGET_VARIANT_CONFIG := emily_defconfig
+#TARGET_SELINUX_CONFIG := emily_defconfig
