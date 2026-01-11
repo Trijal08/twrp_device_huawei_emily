@@ -1,8 +1,20 @@
+# For building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
+
+# 12.1 manifest requirements
+TARGET_SUPPORTS_64_BIT_APPS := true
+TARGET_IS_64_BIT := true
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := KIRIN
 TARGET_NO_BOOTLOADER := true
 
 # Platform
+TARGET_SOC := kirin970
+TARGET_SOC_NAME := kirin
 TARGET_BOARD_PLATFORM := generic
 TARGET_BOARD_PLATFORM_GPU := kirin
 
@@ -20,8 +32,16 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 
-BOARD_KERNEL_CMDLINE := 
+# Enable 64-bit for non-zygote.
+ZYGOTE_FORCE_64 := true
 
+# Force any prefer32 targets to be compiled as 64 bit.
+IGNORE_PREFER32_ON_DEVICE := true
+
+ENABLE_CPUSETS := true
+ENABLE_SCHEDBOOST := true
+
+# Kernel
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x8000 --ramdisk_offset 0x01000000 --tags_offset 0x0100
@@ -33,11 +53,12 @@ TARGET_PREBUILT_KERNEL := device/huawei/emily/dummykernel
 # TARGET_KERNEL_SOURCE := kernel/huawei/emily
 # TARGET_KERNEL_CONFIG := emily_defconfig
 
+# Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 5905580032
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 119663493120
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+# BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
@@ -45,10 +66,13 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
+TARGET_COPY_OUT_VENDOR := vendor
+
 # SELinux
 SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_DIRS += device/huawei/emily/sepolicy
 
+# TWRP Flags
 TW_THEME := portrait_hdpi
 BOARD_SUPPRESS_SECURE_ERASE := true
 RECOVERY_SDCARD_ON_DATA := true
@@ -58,8 +82,9 @@ TW_NO_HAPTICS := true
 TW_NO_SCREEN_BLANK := true
 TW_USE_TOOLBOX := true
 TW_DEFAULT_BRIGHTNESS := "2048"
+TW_MAX_BRIGHTNESS := 2048
+TW_EXTRA_LANGUAGES := true
+TW_INCLUDE_NTFS_3G := true
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/Battery
 # Device crashes if /sbin/modprobe is present so this is needed:
 BOARD_CUSTOM_BOOTIMG_MK := device/huawei/emily/custombootimg.mk
-# MTP will not work until we update it to support ffs
-TW_EXCLUDE_MTP := true
