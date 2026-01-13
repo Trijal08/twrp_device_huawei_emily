@@ -1,0 +1,20 @@
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+# mount point  fstype device                             device2              	flags
+/kernel				emmc		/dev/block/platform/ff3c0000.ufs/by-name/kernel  	              flags=slotselect;display="Kernel";backup=1;flashimg=1
+/ramdisk			emmc		/dev/block/platform/ff3c0000.ufs/by-name/ramdisk            flags=slotselect;display="Ramdisk";backup=1;flashimg=1
+/data                           f2fs            /dev/block/platform/ff3c0000.ufs/by-name/userdata             flags=length=-16384,fileencryption=aes-256-xts:aes-256-cts,reservedsize=20M
+/dts				emmc		/dev/block/platform/ff3c0000.ufs/by-name/dts	              flags=slotselect;display="DTS";backup=1;flashimg=1
+/dto				emmc		/dev/block/platform/ff3c0000.ufs/by-name/dto	              flags=slotselect;display="DTO";backup=1;flashimg=1
+/oeminfo                            emmc            /dev/block/platform/ff3c0000.ufs/by-name/oeminfo                  flags=slotselect;display="OEMInfo";backup=1;flashimg=1
+/persist		        ext4		/dev/block/platform/ff3c0000.ufs/by-name/persist              flags=slotselect;display="Persist";backup=1;flashimg=1
+/misc                           emmc            /dev/block/platform/ff3c0000.ufs/by-name/misc
+/modem_fw				emmc		/dev/block/platform/ff3c0000.ufs/by-name/modem_fw	              flags=slotselect;backup=1;display="Modem_FW"
+/super                          emmc            /dev/block/platform/ff3c0000.ufs/by-name/super	              flags=slotselect;display="Super";backup=1;flashimg=1
+/vbmeta				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta	              flags=slotselect;display="VBMeta";backup=1;flashimg=1
+
+# Removable storage
+/usb_otg			auto 		/dev/block/sde1                    /dev/block/sde             flags=fsflags=utf8;display="USB Mass Storage";storage;wipeingui;removable
+/sdcard 			auto 		/dev/block/mmcblk1p1               /dev/block/mmcblk1         flags=fsflags=utf8;display="MicroSD";storage;wipeingui;removable
