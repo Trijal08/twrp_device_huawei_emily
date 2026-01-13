@@ -90,5 +90,12 @@ TW_MAX_BRIGHTNESS := 2048
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/Battery
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
+TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_RESETPROP_SOURCE := true
+TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_LIBRESETPROP_SOURCE := true
+TW_EXCLUDE_APEX := true
 # Device crashes if /sbin/modprobe is present so this is needed:
 BOARD_CUSTOM_BOOTIMG_MK := device/huawei/emily/custombootimg.mk
