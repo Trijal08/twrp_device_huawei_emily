@@ -18,6 +18,9 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
+# Inherit device configuration
+$(call inherit-product, device/huawei/emily/device.mk)
+
 # Inherit some common recovery stuff
 $(call inherit-product, vendor/*/config/common.mk)
 
