@@ -72,9 +72,6 @@ TARGET_COPY_OUT_VENDOR := vendor
 SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_DIRS += device/huawei/emily/sepolicy
 
-# Fix unified recovery/root directory errors
-TARGET_RECOVERY_DEVICE_DIRS := device/huawei/emily
-
 # TWRP Flags
 TW_THEME := portrait_hdpi
 BOARD_SUPPRESS_SECURE_ERASE := true

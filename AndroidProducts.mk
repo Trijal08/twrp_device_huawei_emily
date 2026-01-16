@@ -14,14 +14,9 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/twrp_emily.mk \
-	$(LOCAL_DIR)/twrp_charlotte.mk
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/twrp_emily.mk
 
 COMMON_LUNCH_CHOICES := \
     twrp_emily-user \
     twrp_emily-userdebug \
-    twrp_emily-eng \
-    twrp_charlotte-user \
-    twrp_charlotte-userdebug \
-    twrp_charlotte-eng
+    twrp_emily-eng
