@@ -19,6 +19,11 @@
 /modem_fw				emmc		/dev/block/platform/ff3c0000.ufs/by-name/modem_fw	              flags=slotselect;backup=1;display="Modem_FW"
 /super                          emmc            /dev/block/platform/ff3c0000.ufs/by-name/super	              flags=slotselect;display="Super";backup=1;flashimg=1
 /vbmeta				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta	              flags=slotselect;display="VBMeta";backup=1;flashimg=1
+/vbmeta_system				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_system	              flags=slotselect;display="VBMeta_System";backup=1;flashimg=1
+/vbmeta_vendor				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_vendor	              flags=slotselect;display="VBMeta_Vendor";backup=1;flashimg=1
+/vbmeta_odm				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_odm	              flags=slotselect;display="VBMeta_ODM";backup=1;flashimg=1
+/vbmeta_hw_product				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_hw_product	              flags=slotselect;display="VBMeta_HW_Product";backup=1;flashimg=1
+/vbmeta_cust				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_cust	              flags=slotselect;display="VBMeta_Cust";backup=1;flashimg=1
 
 # Logical (super) partitions
 /system             emmc        /dev/block/mapper/system                                      flags=slotselect;logical;display="System";backup=1;flashimg=1
