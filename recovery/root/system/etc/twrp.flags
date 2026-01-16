@@ -4,7 +4,6 @@
 
 # mount point  fstype device                             device2              	flags
 /kernel				emmc		/dev/block/platform/ff3c0000.ufs/by-name/kernel  	              flags=slotselect;display="Kernel";backup=1;flashimg=1
-/erecovery_kernel    emmc        /dev/block/platform/ff3c0000.ufs/by-name/erecovery_kernel   flags=slotselect;display="eRecovery_Kernel";backup=1
 /ramdisk			emmc		/dev/block/platform/ff3c0000.ufs/by-name/ramdisk            flags=slotselect;display="Ramdisk";backup=1;flashimg=1
 /recovery_ramdisk   emmc        /dev/block/platform/ff3c0000.ufs/by-name/recovery_ramdisk   flags=slotselect;display="Recovery_Ramdisk";backup=1;flashimg=1
 /recovery_vendor    emmc        /dev/block/platform/ff3c0000.ufs/by-name/recovery_vendor   flags=slotselect;display="Recovery_Vendor";backup=1;flashimg=1
@@ -13,16 +12,19 @@
 /data                           f2fs            /dev/block/platform/ff3c0000.ufs/by-name/userdata             flags=length=-16384,fileencryption=aes-256-xts:aes-256-cts,reservedsize=20M
 /dts				emmc		/dev/block/platform/ff3c0000.ufs/by-name/dts	              flags=slotselect;display="DTS";backup=1;flashimg=1
 /dto				emmc		/dev/block/platform/ff3c0000.ufs/by-name/dto	              flags=slotselect;display="DTO";backup=1;flashimg=1
-/oeminfo                            emmc            /dev/block/platform/ff3c0000.ufs/by-name/oeminfo                  flags=slotselect;display="OEMInfo";backup=1;flashimg=1
 /persist		        ext4		/dev/block/platform/ff3c0000.ufs/by-name/persist              flags=slotselect;display="Persist";backup=1;flashimg=1
 /misc                           emmc            /dev/block/platform/ff3c0000.ufs/by-name/misc
-/modem_fw				emmc		/dev/block/platform/ff3c0000.ufs/by-name/modem_fw	              flags=slotselect;backup=1;display="Modem_FW"
 /super                          emmc            /dev/block/platform/ff3c0000.ufs/by-name/super	              flags=slotselect;display="Super";backup=1;flashimg=1
 /vbmeta				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta	              flags=slotselect;display="VBMeta";backup=1;flashimg=1
 /vbmeta_system				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_system	              flags=slotselect;display="VBMeta_System";backup=1;flashimg=1
 /vbmeta_vendor				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_vendor	              flags=slotselect;display="VBMeta_Vendor";backup=1;flashimg=1
 /vbmeta_odm				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_odm	              flags=slotselect;display="VBMeta_ODM";backup=1;flashimg=1
 /vbmeta_hw_product				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_hw_product	              flags=slotselect;display="VBMeta_HW_Product";backup=1;flashimg=1
+
+# Crucial read-only partitions
+/erecovery_kernel   emmc        /dev/block/platform/ff3c0000.ufs/by-name/erecovery_kernel     flags=slotselect;display="eRecovery_Kernel";backup=1
+/oeminfo            emmc        /dev/block/platform/ff3c0000.ufs/by-name/oeminfo              flags=slotselect;display="OEMInfo";backup=1
+/modem_fw			emmc		/dev/block/platform/ff3c0000.ufs/by-name/modem_fw	          flags=slotselect;backup=1;display="Modem_FW"
 
 # Logical (super) partitions
 /system             emmc        /dev/block/mapper/system                                      flags=slotselect;logical;display="System";backup=1;flashimg=1
