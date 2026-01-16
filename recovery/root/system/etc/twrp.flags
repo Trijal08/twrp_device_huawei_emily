@@ -20,6 +20,13 @@
 /super                          emmc            /dev/block/platform/ff3c0000.ufs/by-name/super	              flags=slotselect;display="Super";backup=1;flashimg=1
 /vbmeta				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta	              flags=slotselect;display="VBMeta";backup=1;flashimg=1
 
+# Logical (super) partitions
+/system             emmc        /dev/block/mapper/system                                      flags=slotselect;logical;display="System";backup=1;flashimg=1
+/vendor             emmc        /dev/block/mapper/vendor                                      flags=slotselect;logical;display="Vendor";backup=1;flashimg=1
+/odm                emmc        /dev/block/mapper/odm                                         flags=slotselect;logical;display="ODM";backup=1;flashimg=1
+/cust               emmc        /dev/block/mapper/cust                                        flags=slotselect;logical;display="Cust";backup=1;flashimg=1
+/hw_product         emmc        /dev/block/mapper/hw_product                                  flags=slotselect;logical;display="HW_Product";backup=1;flashimg=1
+
 # Removable storage
 /usb_otg			auto 		/dev/block/sde1                    /dev/block/sde             flags=fsflags=utf8;display="USB Mass Storage";storage;wipeingui;removable
 /sdcard 			auto 		/dev/block/mmcblk1p1               /dev/block/mmcblk1         flags=fsflags=utf8;display="MicroSD";storage;wipeingui;removable
