@@ -4,6 +4,7 @@
 # General information
 #export FOX_VERSION="R11.1"
 export OF_MAINTAINER="GamerBoy1234294"
+export MAINTAINER=${OF_MAINTAINER}
 export OF_MAINTAINER_AVATAR="device/huawei/emily/maintainer.png"
 
 # Build environment stuffs
