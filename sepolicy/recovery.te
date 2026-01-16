@@ -1,10 +1,10 @@
 allow recovery media_rw_data_file:dir { rw_dir_perms add_name create setattr };
 allow recovery media_rw_data_file:file { read open write setattr getattr create };
-allow recovery mtp_device:chr_file { read write getattr lock append open };
+allow recovery mtp_device:chr_file { read write getattr lock append open ioctl };
 
-allow recovery rootfs:file { read open write setattr getattr create };
+allow recovery rootfs:file { read open write setattr getattr create relabelfrom };
 allow recovery rootfs:lnk_file { unlink create };
-allow recovery rootfs:dir { add_name write getattr create remove_name rmdir  };
+allow recovery rootfs:dir { add_name write getattr setattr create remove_name rmdir };
 allow recovery rootfs:fifo_file { read open create unlink };
 
 allow recovery recovery_data_file:dir { rw_dir_perms add_name create setattr };
@@ -32,7 +32,7 @@ allow recovery ota_package_file:dir { read getattr };
 allow recovery vndservice_contexts_file:file { getattr };
 allow recovery service_contexts_file:file { getattr };
 allow recovery hwservice_contexts_file:file { getattr };
-allow recovery nonplat_service_contexts_file:file { getattr };
+# allow recovery nonplat_service_contexts_file:file { getattr };
 allow recovery seapp_contexts_file:file { getattr };
 allow recovery sepolicy_file:file { getattr };
 
@@ -63,7 +63,13 @@ allow recovery block_device:lnk_file { create rename };
 
 allow recovery self:netlink_kobject_uevent_socket { bind };
 allow recovery system_data_file:file { open write };
-allow recovery self:capability { fsetid };
+allow recovery self:capability { fsetid sys_rawio };
 allow recovery configfs:file { getattr };
 allow recovery ashmem_libcutils_device:chr_file { execute };
 allow recovery linkerconfig_file:dir { getattr };
+
+# For 14 branch
+allow recovery cache_file:lnk_file unlink;
+allow recovery configfs:dir search;
+allow recovery default_prop:property_service set;
+allow recovery proc:file { open read write getattr };

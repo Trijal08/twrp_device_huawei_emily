@@ -73,6 +73,7 @@ SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_DIRS += device/huawei/emily/sepolicy
 
 # TWRP Flags
+TARGET_RECOVERY_DEVICE_MODULES += task_profiles.json # needed to spoof task_profiles.json as present
 TW_THEME := portrait_hdpi
 BOARD_SUPPRESS_SECURE_ERASE := true
 RECOVERY_SDCARD_ON_DATA := true
