@@ -21,6 +21,7 @@
 /vbmeta_odm				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_odm	              flags=slotselect;display="VBMeta_ODM";backup=1;flashimg=1
 /vbmeta_hw_product				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_hw_product	              flags=slotselect;display="VBMeta_HW_Product";backup=1;flashimg=1
 /vbmeta_cust				emmc		/dev/block/platform/ff3c0000.ufs/by-name/vbmeta_cust	              flags=slotselect;display="VBMeta_Cust";backup=1;flashimg=1
+/cache              ext4        /dev/block/platform/ff3c0000.ufs/by-name/cache
 
 # Crucial read-only partitions
 /erecovery_kernel   emmc        /dev/block/platform/ff3c0000.ufs/by-name/erecovery_kernel     flags=slotselect;display="eRecovery_Kernel";backup=1
