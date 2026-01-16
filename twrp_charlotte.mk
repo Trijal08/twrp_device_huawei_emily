@@ -14,14 +14,22 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/twrp_emily.mk \
-	$(LOCAL_DIR)/twrp_charlotte.mk
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
-COMMON_LUNCH_CHOICES := \
-    twrp_emily-user \
-    twrp_emily-userdebug \
-    twrp_emily-eng \
-    twrp_charlotte-user \
-    twrp_charlotte-userdebug \
-    twrp_charlotte-eng
+# Inherit device configuration
+$(call inherit-product, device/huawei/emily/device.mk)
+
+# Inherit some common recovery stuff
+$(call inherit-product, vendor/*/config/common.mk)
+
+PRODUCT_PACKAGES += \
+    charger_res_images \
+    charger
+
+PRODUCT_NAME := twrp_charlotte
+PRODUCT_DEVICE := charlotte
+PRODUCT_BRAND := Huawei
+PRODUCT_MODEL := P20 Pro
+PRODUCT_MANUFACTURER := Huawei
