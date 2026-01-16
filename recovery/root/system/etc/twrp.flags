@@ -25,7 +25,11 @@
 # Crucial read-only partitions
 /erecovery_kernel   emmc        /dev/block/platform/ff3c0000.ufs/by-name/erecovery_kernel     flags=slotselect;display="eRecovery_Kernel";backup=1
 /oeminfo            emmc        /dev/block/platform/ff3c0000.ufs/by-name/oeminfo              flags=slotselect;display="OEMInfo";backup=1
+/nvme               emmc        /dev/block/platform/ff3c0000.ufs/by-name/nvme                 flags=slotselect;display="NVMe";backup=1
+/modemnvm_update    emmc        /dev/block/platform/ff3c0000.ufs/by-name/modemnvm_update      flags=slotselect;display="ModemNVM_Update";backup=1
+/modemnvm_cust      emmc        /dev/block/platform/ff3c0000.ufs/by-name/modemnvm_cust        flags=slotselect;display="ModemNVM_Cust";backup=1
 /modem_fw			emmc		/dev/block/platform/ff3c0000.ufs/by-name/modem_fw	          flags=slotselect;backup=1;display="Modem_FW"
+/modem_secure		emmc		/dev/block/platform/ff3c0000.ufs/by-name/modem_secure         flags=slotselect;backup=1;display="Modem_Secure"
 
 # Logical (super) partitions
 /system             emmc        /dev/block/mapper/system                                      flags=slotselect;logical;display="System";backup=1;flashimg=1
