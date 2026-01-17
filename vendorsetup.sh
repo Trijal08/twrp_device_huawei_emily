@@ -20,13 +20,13 @@ export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
 # Vanilla build
 export FOX_VANILLA_BUILD=1
 
-## Screen specifications
-#export OF_STATUS_INDENT_LEFT=48
-#export OF_STATUS_INDENT_RIGHT=48
-#export OF_ALLOW_DISABLE_NAVBAR=0
-#export OF_CLOCK_POS=0
-#export OF_SCREEN_H=2400
-#export OF_STATUS_H=120
+# Screen specifications
+export OF_STATUS_INDENT_LEFT=48
+export OF_STATUS_INDENT_RIGHT=48
+export OF_ALLOW_DISABLE_NAVBAR=0
+export OF_CLOCK_POS=0
+export OF_SCREEN_H=2240
+export OF_STATUS_H=85
 
 # Device stuff
 export OF_USE_LEGACY_BATTERY_SERVICES=1
