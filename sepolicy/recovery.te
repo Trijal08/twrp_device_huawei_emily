@@ -73,3 +73,7 @@ allow recovery cache_file:lnk_file unlink;
 allow recovery configfs:dir search;
 allow recovery default_prop:property_service set;
 allow recovery proc:file { open read write getattr };
+allow recovery dm_device:blk_file { open read write ioctl };
+allow recovery system_data_file:dir { add_name write getattr setattr create remove_name rmdir unlink };
+allow recovery system_data_file:file { open read write getattr setattr create unlink };
+allow recovery unlabeled:dir { rw_dir_perms add_name create setattr mounton };
