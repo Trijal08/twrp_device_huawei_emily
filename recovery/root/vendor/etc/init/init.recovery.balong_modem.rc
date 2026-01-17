@@ -1,8 +1,0 @@
-on post-fs && property:ro.boot.hota.mode=0
-    mkdir /modem_fw
-    wait /dev/block/by-name/modem_fw
-    mount ext4 /dev/block/by-name/modem_fw /modem_fw ro context=u:object_r:modem_fw_file:s0
-    wait /dev/block/by-name/modemnvm_img
-	mkdir /mnvm2:0
-    mount ext4 /dev/block/by-name/modemnvm_img /mnvm2:0 rw context=u:object_r:modem_nv_file:s0
-	write /sys/devices/platform/his_modem/modem_sysboot_start 1
