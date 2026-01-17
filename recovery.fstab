@@ -1,7 +1,5 @@
 # blk_device                                    mount_point fs_type
-/dev/block/mmcblk1p1                            /sdcard     vfat      defaults        defaults
-defaults                                        /storage    ramdisk   defaults        defaults
-defaults                                        /dload      ramdisk   defaults        defaults
+/dev/block/mmcblk1p1                            /external_sd     vfat      defaults        defaults
 /dev/block/bootdevice/by-name/system     /system     ext4      defaults        defaults
 /dev/block/bootdevice/by-name/vendor     /vendor     ext4      defaults        defaults
 /dev/block/bootdevice/by-name/hw_product /hw_product ext4      defaults        defaults
