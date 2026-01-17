@@ -68,6 +68,13 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 
 TARGET_COPY_OUT_VENDOR := vendor
 
+# Dynamic partitions (super)
+BOARD_SUPER_PARTITION_SIZE := 5771493376 # 5.5GB (5771362304+131072)
+BOARD_SUPER_PARTITION_GROUPS := huawei_dynamic_partitions
+BOARD_HUAWEI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext vendor # Partitions available in stock and custom ROMs
+#BOARD_HUAWEI_DYNAMIC_PARTITIONS_PARTITION_LIST += cust hw_product # Huawei specific
+BOARD_HUAWEI_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
+
 # SELinux
 SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_DIRS += device/huawei/emily/sepolicy
