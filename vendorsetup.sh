@@ -5,7 +5,9 @@
 #export FOX_VERSION="R11.1"
 export OF_MAINTAINER="GamerBoy1234294"
 export MAINTAINER=${OF_MAINTAINER}
-export OF_MAINTAINER_AVATAR="device/huawei/emily/maintainer.png"
+if [ -f $(realpath .)/bootable/recovery/gui/theme/portrait_hdpi/images/Default/About/maintainer.png ]; then
+    ln -sf ../../../../../../../../device/huawei/emily/maintainer.png $(realpath .)/bootable/recovery/gui/theme/portrait_hdpi/images/Default/About/maintainer.png
+fi
 
 # Build environment stuffs
 export ALLOW_MISSING_DEPENDENCIES=true
