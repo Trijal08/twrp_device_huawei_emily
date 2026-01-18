@@ -35,6 +35,9 @@ on boot
     restorecon /vendor/bin/aptouch_daemon
     start aptouch
 
+    setprop ro.boot.bootdevice ff3c0000.ufs
+    symlink /dev/block/platform/${ro.boot.bootdevice} /dev/block/bootdevice
+
 on property:odm.thp.service_enable=1
     start aptouch
 
