@@ -7,15 +7,41 @@ on init
     start watchdogd
     setprop logd.ready true
 
+    chmod 0660 /dev/hisi_teelog
+    chown system drmrpc /dev/hisi_teelog
+    chmod 0660 /dev/hisi_teelog
+    chown system drmrpc /dev/tc_ns_client
+    chmod 0660 /dev/hwbinder
+    chown system system /dev/hwbinder
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    chown system system /sys/kernel/tui/c_state
+
+    mkdir /sec_storage
+    mount ext4 /dev/block/bootdevice/by-name/secure_storage /sec_storage nosuid nodev noatime wait crypt discard,auto_da_alloc,mblk_io_submit,data=journal,context=u:object_r:teecd_data_file:s0
+    chown root root /sec_storage
+    chmod 600 /sec_storage
+
 on late-init
     setprop sys.usb.controller ff100000.dwc3
-    setprop ro.debuggable 1
-    setprop service.adb.root 1
+    setprop ro.debuggable 0
+    setprop service.adb.root 0
     setprop sys.usb.configfs 1
     setprop sys.usb.config adb
 
 on fs
     start hwservicemanager
+
+on post-fs-data
+    mkdir /data/vendor/log/sec_storage_data 0775 system system
+    mkdir /data/vendor/log/sec_storage_data/log 0755 system system
+    mkdir /data/vendor/sec_storage_data 0700 system system
+    restorecon /data/vendor/sec_storage_data
+    mkdir /data/vendor/sec_storage_data_users 0700 system system
+    restorecon /data/vendor/sec_storage_data_users
+
+    install_keyring
+    setprop crypto.ready 1
 
 service hwservicemanager /system/bin/hwservicemanager
     user root
@@ -47,3 +73,90 @@ on property:odm.thp.service_enable=1
 
 on property:odm.thp.service_enable=0
     stop aptouch
+
+# Decryption libraries services
+service teeauth /system/bin/tee_auth_daemon
+    socket tui_daemon stream 660 system system
+    socket tee-multi-user stream 660 system system
+    class early_hal
+    user root
+    group root system readproc drmrpc
+    disabled
+    seclabel u:r:tee:s0
+
+service teecd /vendor/bin/teecd
+    user root
+    group root system readproc drmrpc
+    disabled
+    seclabel u:r:tee:s0
+
+service teelogcat /vendor/bin/tlogcat -f
+    class late_start
+    user root
+    group root system drmrpc
+    disabled
+    seclabel u:r:tlogcat:s0
+
+service libteec-3-0 /vendor/bin/hw/vendor.huawei.hardware.libteec@3.0-service
+    class early_hal
+    user root
+    group root system readproc drmrpc
+    disabled
+    seclabel u:r:tee:s0
+
+service hwservicemanager /system/bin/hwservicemanager
+    user root
+    group root
+    disabled
+    onrestart setprop hwservicemanager.ready false
+    seclabel u:r:recovery:s0
+
+service servicemanager /system/bin/servicemanager
+    user root
+    group root readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore2 /system/bin/keystore2 /data/misc/keystore
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+    class hal
+    interface android.hardware.keymaster@3.0::IKeymasterDevice default
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keymaster-3-0 /vendor/bin/hw/android.hardware.keymaster@3.0-service
+    class early_hal
+    user root
+    group root drmrpc
+    disabled
+    seclabel u:r:recovery:s0
+
+on property:crypto.ready=0
+    stop teeauth
+    stop teecd
+    stop teelogcat
+    stop libteec-3-0
+    stop keymaster-3-0
+    stop gatekeeper-1-0
+    stop hwservicemanager
+    stop keystore2
+    stop servicemanager
+
+on property:crypto.ready=1
+    start teeauth
+    start teecd
+    start teelogcat
+    start libteec-3-0
+
+on property:sys.listeners.registered=true
+    start hwservicemanager
+    start keymaster-3-0
+    start gatekeeper-1-0
+    start servicemanager
