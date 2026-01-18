@@ -1,6 +1,9 @@
 on init
     write /proc/sys/kernel/hung_task_timeout_secs 0
 
+    setprop ro.boot.bootdevice ff3c0000.ufs
+    symlink /dev/block/platform/${ro.boot.bootdevice} /dev/block/bootdevice
+
     start watchdogd
     setprop logd.ready true
 
