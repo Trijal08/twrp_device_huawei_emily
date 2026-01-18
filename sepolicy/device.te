@@ -3,3 +3,4 @@
 # ==============================================
 
 type recovery_device, dev_type;
+type teecd_device, dev_type;

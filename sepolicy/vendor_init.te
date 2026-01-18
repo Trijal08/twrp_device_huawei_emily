@@ -16,4 +16,4 @@ allow vendor_init rootfs:dir { add_name write create setattr };
 # Allow setting props for TWRP 14
 allow vendor_init build_bootimage_prop:property_service set;
 allow vendor_init default_prop:property_service set;
-# allow vendor_init build_prop:property_service set;
+allow vendor_init build_prop:property_service set;

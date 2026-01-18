@@ -32,7 +32,7 @@ allow recovery ota_package_file:dir { read getattr };
 allow recovery vndservice_contexts_file:file { getattr };
 allow recovery service_contexts_file:file { getattr };
 allow recovery hwservice_contexts_file:file { getattr };
-# allow recovery nonplat_service_contexts_file:file { getattr };
+allow recovery nonplat_service_contexts_file:file { getattr };
 allow recovery seapp_contexts_file:file { getattr };
 allow recovery sepolicy_file:file { getattr };
 

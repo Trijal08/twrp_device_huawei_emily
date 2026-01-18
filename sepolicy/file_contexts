@@ -1,5 +1,10 @@
 # TEE
 /vendor/bin/teecd             u:object_r:tee_exec:s0
+/dev/tc_ns_client             u:object_r:teecd_device:s0
 
 # aptouch
 /vendor/bin/aptouch_daemon	  u:object_r:aptouch_exec:s0
+
+# # keymaster and gatekeeper
+# /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service    u:object_r:recovery_exec:s0
+# /vendor/bin/hw/android\.hardware\.keymaster@3\.0-service     u:object_r:recovery_exec:s0
