@@ -54,19 +54,40 @@ TARGET_PREBUILT_KERNEL := device/huawei/emily/dummykernel
 # TARGET_KERNEL_CONFIG := emily_defconfig
 
 # Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
+BOARD_BOOTIMAGE_PARTITION_SIZE := 25165824
+BOARD_CACHEIMAGE_PARTITION_SIZE := 134217728
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 5905580032
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 119663493120
-# BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_RECVENDORIMAGE_PARTITION_SIZE := 16777216
+BOARD_BOOTRAMDISKIMAGE_PARTITION_SIZE := 2097152
+# BOARD_SYSTEMIMAGE_PARTITION_SIZE := 5905580032
+# BOARD_USERDATAIMAGE_PARTITION_SIZE := 119663493120
+# BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+# BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_CUSTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_HW_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
+
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
+TARGET_COPY_OUT_ODM := odm
+TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_SYSTEM := system
+TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_HW_PRODUCT := hw_product
+TARGET_COPY_OUT_CUST := cust
+TARGET_COPY_OUT_USERDATA := userdata
 
 # Dynamic partitions (super)
 BOARD_SUPER_PARTITION_SIZE := 5771493376 # 5.5GB (5771362304+131072)
@@ -75,9 +96,21 @@ BOARD_HUAWEI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext 
 #BOARD_HUAWEI_DYNAMIC_PARTITIONS_PARTITION_LIST += hw_product cust
 BOARD_HUAWEI_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
 
+# BOARD_SUPER_PARTITION_BLOCK_DEVICES := cust system vendor
+
+BOARD_USES_METADATA_PARTITION := true
+BOARD_SUPER_PARTITION_METADATA_DEVICE := system
+
+# BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 652214272
+# BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 2650800128
+
 # SELinux
 SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_DIRS += device/huawei/emily/sepolicy
+
+# Hack: prevent anti rollback
+PLATFORM_SECURITY_PATCH := 2099-12-31
+PLATFORM_VERSION := 99.99.99
 
 # TWRP Flags
 TARGET_RECOVERY_DEVICE_MODULES += task_profiles.json # needed to spoof task_profiles.json as present
@@ -111,4 +144,8 @@ TW_EXCLUDE_APEX := true
 # Device crashes if /sbin/modprobe is present so this is needed:
 BOARD_CUSTOM_BOOTIMG_MK := device/huawei/emily/custombootimg.mk
 TW_OVERRIDE_SYSTEM_PROPS := \
-    "ro.bootimage.build.date.utc=ro.build.date.utc;ro.build.date.utc;ro.odm.build.date.utc=ro.build.date.utc;ro.product.build.date.utc=ro.build.date.utc;ro.system.build.date.utc=ro.build.date.utc;ro.system_ext.build.date.utc=ro.build.date.utc;ro.vendor.build.date.utc=ro.build.date.utc;ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.name=ro.product.system.name"
+    "ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental"
+
+# TWRP Debug Flags
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
