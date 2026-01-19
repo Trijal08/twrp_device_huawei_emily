@@ -7,21 +7,6 @@ on init
     start watchdogd
     setprop logd.ready true
 
-    chmod 0660 /dev/hisi_teelog
-    chown system drmrpc /dev/hisi_teelog
-    chmod 0660 /dev/hisi_teelog
-    chown system drmrpc /dev/tc_ns_client
-    chmod 0660 /dev/hwbinder
-    chown system system /dev/hwbinder
-    chmod 0664 /dev/ion
-    chown system system /dev/ion
-    chown system system /sys/kernel/tui/c_state
-
-    mkdir /sec_storage
-    mount ext4 /dev/block/bootdevice/by-name/secure_storage /sec_storage nosuid nodev noatime wait crypt discard,auto_da_alloc,mblk_io_submit,data=journal,context=u:object_r:teecd_data_file:s0
-    chown root root /sec_storage
-    chmod 600 /sec_storage
-
 on late-init
     setprop sys.usb.controller ff100000.dwc3
     setprop ro.debuggable 0
@@ -31,17 +16,6 @@ on late-init
 
 on fs
     start hwservicemanager
-
-on post-fs-data
-    mkdir /data/vendor/log/sec_storage_data 0775 system system
-    mkdir /data/vendor/log/sec_storage_data/log 0755 system system
-    mkdir /data/vendor/sec_storage_data 0700 system system
-    restorecon /data/vendor/sec_storage_data
-    mkdir /data/vendor/sec_storage_data_users 0700 system system
-    restorecon /data/vendor/sec_storage_data_users
-
-    install_keyring
-    setprop crypto.ready 1
 
 service hwservicemanager /system/bin/hwservicemanager
     user root
@@ -67,6 +41,31 @@ on boot
     symlink /dev/block/platform/${ro.boot.bootdevice} /dev/block/bootdevice
 
     start health-hal-2-0
+
+    mkdir /data/vendor/log/sec_storage_data 0775 system system
+    mkdir /data/vendor/log/sec_storage_data/log 0755 system system
+    mkdir /data/vendor/sec_storage_data 0700 system system
+    restorecon /data/vendor/sec_storage_data
+    mkdir /data/vendor/sec_storage_data_users 0700 system system
+    restorecon /data/vendor/sec_storage_data_users
+
+    chmod 0660 /dev/hisi_teelog
+    chown system drmrpc /dev/hisi_teelog
+    chmod 0660 /dev/hisi_teelog
+    chown system drmrpc /dev/tc_ns_client
+    chmod 0660 /dev/hwbinder
+    chown system system /dev/hwbinder
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    chown system system /sys/kernel/tui/c_state
+
+    mkdir /sec_storage
+    mount ext4 /dev/block/bootdevice/by-name/secure_storage /sec_storage nosuid nodev noatime wait crypt discard,auto_da_alloc,mblk_io_submit,data=journal,context=u:object_r:tee:s0
+    chown root root /sec_storage
+    chmod 600 /sec_storage
+
+    install_keyring
+    setprop crypto.ready 1
 
 on property:odm.thp.service_enable=1
     start aptouch
@@ -95,7 +94,7 @@ service teelogcat /vendor/bin/tlogcat -f
     user root
     group root system drmrpc
     disabled
-    seclabel u:r:tlogcat:s0
+    seclabel u:r:tee:s0
 
 service libteec-3-0 /vendor/bin/hw/vendor.huawei.hardware.libteec@3.0-service
     class early_hal
