@@ -1,6 +1,6 @@
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) \
 		$(recovery_ramdisk) \
-		$(recovery_kernel) \
+		/dev/null \
 		$(MKBOOTFS) $(MINIGZIP)
 	@echo ----- Removing modprobe symlink -----
 	rm -f $(TARGET_RECOVERY_ROOT_OUT)/sbin/modprobe
