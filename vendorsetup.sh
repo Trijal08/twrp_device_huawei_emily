@@ -35,6 +35,9 @@ export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
 # Vanilla build
 export FOX_VANILLA_BUILD=1
 
+# Recovery partition name
+export FOX_RECOVERY_INSTALL_PARTITION="/dev/block/by-name/recovery_ramdisk"
+
 # Screen specifications
 export OF_STATUS_INDENT_LEFT=48
 export OF_STATUS_INDENT_RIGHT=48
