@@ -4,8 +4,13 @@ allow vendor_init default_prop:file read;
 allow vendor_init kernel:system module_request;
 allow vendor_init proc:file write;
 allow vendor_init proc_max_map_count:file write;
+allow vendor_init rootfs:file { rw_file_perms create setattr unlink };
 allow vendor_init rootfs:dir write;
 allow vendor_init selinuxfs:file write;
+
+allow vendor_init block_device:blk_file { open create getattr setattr read write lock append open unlink };
+
+allow vendor_init device:chr_file { open create getattr setattr read write lock append open unlink };
 
 # Allow vendor_init to set SELinux checkreqprot
 allow vendor_init kernel:security setcheckreqprot;
@@ -16,4 +21,4 @@ allow vendor_init rootfs:dir { add_name write create setattr };
 # Allow setting props for TWRP 14
 allow vendor_init build_bootimage_prop:property_service set;
 allow vendor_init default_prop:property_service set;
-# allow vendor_init build_prop:property_service set;
+# allow vendor_init build_prop:property_service set;;
