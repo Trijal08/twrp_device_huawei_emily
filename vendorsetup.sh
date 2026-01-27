@@ -67,3 +67,6 @@ export FOX_BASH_TO_SYSTEM_BIN=1
 export FOX_ENABLE_APP_MANAGER=1
 export FOX_VARIANT="default"
 export OF_USE_GREEN_LED=1
+
+# Exclude broken add-ons
+export FOX_DELETE_INITD_ADDON=1
