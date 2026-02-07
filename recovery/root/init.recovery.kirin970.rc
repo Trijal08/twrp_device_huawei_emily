@@ -16,10 +16,18 @@ on late-init
 
 on fs
     start fixlinks
+    start hwservicemanager
 
 service fixlinks /sbin/fixlinks.sh
     oneshot
     disabled
+    seclabel u:r:recovery:s0
+
+service hwservicemanager /system/bin/hwservicemanager
+    user root
+    group root
+    disabled
+    onrestart setprop hwservicemanager.ready false
     seclabel u:r:recovery:s0
 
 service oeminfo_nvm /sbin/true
@@ -37,6 +45,8 @@ on boot
 
     setprop ro.boot.bootdevice ff3c0000.ufs
     symlink /dev/block/platform/${ro.boot.bootdevice} /dev/block/bootdevice
+
+    start health-hal-2-0
 
 on property:odm.thp.service_enable=1
     start aptouch
