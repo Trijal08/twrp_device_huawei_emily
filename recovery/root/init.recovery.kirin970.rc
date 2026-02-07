@@ -15,13 +15,7 @@ on late-init
     setprop sys.usb.config adb
 
 on fs
-    start fixlinks
     start hwservicemanager
-
-service fixlinks /sbin/fixlinks.sh
-    oneshot
-    disabled
-    seclabel u:r:recovery:s0
 
 service hwservicemanager /system/bin/hwservicemanager
     user root
