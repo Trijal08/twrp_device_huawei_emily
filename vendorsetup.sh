@@ -46,9 +46,6 @@ export OF_CLOCK_POS=0
 export OF_SCREEN_H=2240
 export OF_STATUS_H=85
 
-# Device stuff
-export OF_USE_LEGACY_BATTERY_SERVICES=1
-
 # Use updated binaries
 export FOX_REPLACE_TOOLBOX_GETPROP=1
 export FOX_BASH_TO_SYSTEM_BIN=1
