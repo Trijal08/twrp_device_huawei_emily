@@ -58,6 +58,11 @@ export OF_RUN_POST_FORMAT_PROCESS=1
 # Use /data/recovery/Fox/ for Storage
 export FOX_USE_DATA_RECOVERY_FOR_SETTINGS=1
 
+# Magisk
+MAGISK_URL=$(curl -LsSf https://api.github.com/repos/topjohnwu/Magisk/releases/tags/v27.0 | jq -r '.assets[].browser_download_url | select(test("/Magisk[^/]+\\.apk$"))')
+curl -LC - $MAGISK_URL -o device/huawei/emily/Magisk.zip
+export FOX_USE_SPECIFIC_MAGISK_ZIP=$(realpath .)/device/huawei/emily/Magisk.zip
+
 # Don't install AromaFM
 export FOX_DELETE_AROMAFM=1
 
